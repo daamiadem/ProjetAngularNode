@@ -1,0 +1,78 @@
+<div style="display: flex; margin-top:20px ">
+  <div class="col-lg-8  grid-margin stretch-card" style="display: flex;justify-content:center; margin-top: 20px; ">
+  <div class="card">
+    <div class="card-body">
+      <input type="text" [(ngModel)]="userFilter.name" placeholder="name">
+      <input type="text" [(ngModel)]="userFilter.profession" placeholder="Profession" style="margin-left: 100px;">
+
+      <div class="table table-hover" style="width:1000px">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Date de naissance</th>
+              <th>Age</th>
+              <th>profession</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users | filterBy: userFilter" class="ligneuser">
+              <td>{{ user.name | uppercase }}</td>
+             
+              <td>{{ user.date | date}}</td>
+              <td *ngIf="user.age>=18">{{user.age}} </td>
+              <td *ngIf="user.age<18">null </td>
+              <td>{{ user.profession}}</td>
+              <td><button type="button" class="btn btn-danger" (click)="deleteUser(user._id)">Delete</button>
+              </td>
+            </tr>
+         
+     
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div class="col-lg-3">
+  <form [formGroup]="FormUserAdd" (submit)="Ajouterf()">
+
+    <div class="form-group" >
+        <label  >Nom</label>
+        <input type="text" class="form-control" formControlName="name">
+    </div>
+    
+
+
+    <div class="form-group">
+        <label>Date de naissance</label>
+        <input type="date" class="form-control" formControlName="date">
+    </div>
+    
+
+    
+    <div class="form-group">
+        <label>profession</label>
+        <input type="text" class="form-control" formControlName="profession">
+    </div>
+   
+
+
+    <div class="form-group">
+        <label>Age</label>
+        <input type="text" class="form-control" formControlName="age">
+    </div>
+   
+    
+   
+    <input type="submit" class="btn btn-primary" style="margin-left: 40%; margin-bottom: 20px;" value="Ajouter" >
+
+</form>
+
+</div>
+
+</div>
+
